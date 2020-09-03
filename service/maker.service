@@ -1,0 +1,24 @@
+[Unit]
+Description=Service
+#After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/karan/projects/maker
+ExecStart=/home/karan/projects/maker/venv/bin/python3.8 /home/karan/projects/maker/maker.py
+ExecReload=/bin/kill -HUP 
+User=karan
+Group=karan
+
+Restart=always
+TimeoutStartSec=10
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+#sudo mv . /lib/systemd/system/
+#sudo sysmtemctl enable maker.py
+#sudo sysmtemctl start maker.py
+#sudo sysmtemctl status maker.py
+
