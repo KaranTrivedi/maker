@@ -1,5 +1,10 @@
 # Description
-Simple python script for generating a python project with virtual env, logging, config files and dir structure!
+Simple python script for generating a python project with few basic features such as
+* virtual env
+* basic logging
+* configparser and config file
+* basic file structure
+* OPTIONAL: Generate service file to run script as a service.
 
 Excellent guide for structuring your projects:
 https://docs.python-guide.org/writing/structure/
