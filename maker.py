@@ -417,9 +417,10 @@ def main():
     subprocess.run([pip_path, "install", "--upgrade", "pip"], check=True)
     subprocess.run([pip_path, "install", "pylint", "wheel"], check=True)
 
-    print("******************************************************")
-    print("Copy/Paste this line to activate environment.")
-    print("******************************************************")
+    print("*****************************************************************************")
+    print("Copy/Paste this line to terminal to go to project and activate environment.")
+    print("*****************************************************************************")
+
     # source "$root_dir"/$dir/venv/bin/activate;cd "$root_dir"/$dir;clear;ls -lrt
     print(f"cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt;pwd")
 
