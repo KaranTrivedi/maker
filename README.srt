@@ -3,7 +3,11 @@ Simple python script for generating a python project with virtual env, logging, 
 Excellent guide for structuring your projects:
 https://docs.python-guide.org/writing/structure/
 
+REQUIREMENTS:
+python3
 This script has been tested with Ubuntu and python version 3.8
+This should work with python version 3.6 and higher due to the useage of f-strings.
+This should also run on any *nix sysetm.
 
 You should be able to run this script with python3 maker.py -h
 
