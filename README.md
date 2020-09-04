@@ -14,13 +14,16 @@ This should also run on any *nix sysetm.
 ## Getting started
 
 Run command in a folder where you usually create projects.
+```
 git clone https://github.com/KaranTrivedi/maker.git
+```
 
-folder called maker should be created. 
+folder called maker should be created.
+```
 cd maker/
+```
 
 No installation or setup should be needed if you have python3.6+ installed as this project only uses default libs.
-
 
 ## Usage
 You should be able to run this script with python3 maker.py -h
