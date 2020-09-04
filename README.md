@@ -50,9 +50,11 @@ optional arguments:
                         Enter the name of the directory this project will be under.
 ```
 
-Define the root directory for your project as the absoloute path is useful for things like deploying service file.
-Nmae the project with flag -dn. 
+Define the root directory for your project as the absolute path is useful for things like deploying service file.
+Name the project with flag -dn.
+
 Input 'y' for options you would like.
+
 This will set you up with a venv in a given directory with all the initial components needed to get started.
 
 ### Example
