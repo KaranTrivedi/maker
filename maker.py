@@ -81,6 +81,7 @@ def create_dirs(args):
             (proj_path / "docs").mkdir()
             (proj_path / "conf").mkdir()
             (proj_path / "logs").mkdir()
+            Path(proj_path / "logs" / ".gitkeep").touch()
             (proj_path / "data").mkdir()
 
         else:
@@ -231,7 +232,8 @@ def create_gitignore(args):
         args (dict): get args from user input flags.
     """
 
-    gitignore_string = """# Byte-compiled / optimized / DLL files
+    gitignore_string = """!somefolder/.gitkeep
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
