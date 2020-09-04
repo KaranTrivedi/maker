@@ -2,3 +2,23 @@ Simple python script for generating a python project with virtual env, logging, 
 
 Excellent guide for structuring your projects:
 https://docs.python-guide.org/writing/structure/
+
+This script has been tested with Ubuntu and python version 3.8
+
+You should be able to run this script with python3 maker.py -h
+
+usage: maker.py [-h] -rd ROOT_DIR -dn DIR_NAME
+
+Python project maker
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -rd ROOT_DIR, --root_dir ROOT_DIR
+                        enter where you would like the directory to be created.
+  -dn DIR_NAME, --dir_name DIR_NAME
+                        Enter the name of the directory this project will be under.
+
+Define the root directory for your project as the absoloute path is useful for things like deploying service file.
+Nmae the project with flag -dn. 
+Input 'y' for options you would like.
+This will set you up with a venv in a given directory with all the initial components needed to get started.
