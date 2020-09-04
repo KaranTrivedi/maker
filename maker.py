@@ -82,7 +82,6 @@ def create_dirs(args):
             (proj_path / "conf").mkdir()
             (proj_path / "logs").mkdir()
             (proj_path / "data").mkdir()
-            (proj_path / "service").mkdir()
 
         else:
             sys.exit()
@@ -175,14 +174,18 @@ def create_service(args):
     Args:
         args (dict): get args from user input flags.
     """
+
+    proj_path = Path(args["root_dir"]) / args["project_name"]
+    (proj_path / "service").mkdir()
     user = input("Input user name that you would like to run the service as: ")
     group = input("Input group name for user: ")
 
+    check = 'n'
     check = input(f"User/group selected: {user}:{group}. Proceed? [y/n] ")
     if check == 'n':
         sys.exit()
 
-    proj_path = str(Path(args["root_dir"]) / args["project_name"])
+    proj_path = str(proj_path)
     service_string= """[Unit]
 Description=Service
 #After=multi-user.target
@@ -377,8 +380,8 @@ def main():
     create_dirs(args)
     create_config(args)
     create_bin(args)
+    create = 'n'
     create = input("Press y to create service file: ")
-    # create = 'n'
     if create == 'y':
         create_service(args)
 
