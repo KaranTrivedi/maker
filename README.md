@@ -20,10 +20,8 @@ cd maker/
 
 No installation or setup should be needed if you have python3.6+ installed as this project only uses default libs.
 
-## Example
-python maker.py -rd /home/user/projects/ -dn projectname
 
-### Help
+## Usage
 You should be able to run this script with python3 maker.py -h
 
 ```
@@ -39,11 +37,12 @@ optional arguments:
                         Enter the name of the directory this project will be under.
 ```
 
-### Usage
 Define the root directory for your project as the absoloute path is useful for things like deploying service file.
 Nmae the project with flag -dn. 
 Input 'y' for options you would like.
 This will set you up with a venv in a given directory with all the initial components needed to get started.
 
+### Example
+python maker.py -rd /home/user/projects/ -dn projectname
 
-In order for you to run this script I must firt invent the universe..
+In order for you to run this script I must first invent the universe..
