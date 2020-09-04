@@ -1,15 +1,16 @@
+<h1>Description</h1>
 Simple python script for generating a python project with virtual env, logging, config files and dir structure!
 
 Excellent guide for structuring your projects:
 https://docs.python-guide.org/writing/structure/
 
-REQUIREMENTS:
+<h1>REQUIREMENTS</h1>
 python3
 This script has been tested with Ubuntu and python version 3.8
 This should work with python version 3.6 and higher due to the useage of f-strings.
 This should also run on any *nix sysetm.
 
-Get started:
+<h1>Get started</h1>
 
 Run command in a folder where you usually create projects.
 git clone https://github.com/KaranTrivedi/maker.git
@@ -21,9 +22,10 @@ No installation or setup should be needed if you have python3.6+ installed as th
 
 You should be able to run this script with python3 maker.py -h
 
-Example:
+<h2>Example</h2>
 python maker.py -rd /home/user/projects/ -dn projectname
 
+</h3>Help</h3>
 usage: maker.py [-h] -rd ROOT_DIR -dn PROJECT_NAME
 
 Python project maker
