@@ -371,8 +371,6 @@ def main():
     Main function.
     """
 
-    logger.info("####################STARTING####################")
-
     if CONFIG[SECTION]["level"] == "DEBUG":
         show_sections()
 
