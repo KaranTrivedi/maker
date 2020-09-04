@@ -26,8 +26,12 @@ cd maker/
 No installation or setup should be needed if you have python3.6+ installed as this project only uses default libs.
 
 ## Usage
-You should be able to run this script with python3 maker.py -h
+You should be able to run this script with 
+```
+python3 maker.py -h
+```
 
+### Help
 ```
 usage: maker.py [-h] -rd ROOT_DIR -pn PROJECT_NAME
 
