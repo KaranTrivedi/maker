@@ -1,6 +1,6 @@
 # Description
 Simple python script for generating a python project with few basic features such as
-* virtual env
+* virtual environment
 * basic logging
 * configparser and config file
 * basic file structure
