@@ -378,7 +378,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Python project maker',\
                     epilog=f""" Suggested:
-                    python3 maker.py --root_dir {Path.cwd().parent.strip()} --project_name PROJECT_NAME
+                    python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME
                     """)
 
     # Add the arguments
