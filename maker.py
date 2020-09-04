@@ -13,6 +13,7 @@ import logging
 import sys
 from os import path
 from pathlib import Path
+import subprocess
 
 #Define config and logger.
 CONFIG = configparser.ConfigParser()
@@ -367,8 +368,27 @@ def main():
     create_dirs(args)
     create_config(args)
     create_bin(args)
-    create_service(args)
+    # create = input("Press y to create service file: ")
+    create = 'n'
+    if create == 'y':
+        create_service(args)
+
     create_gitignore(args)
+ 
+    # python3.8 -m venv venv
+    proj_path = Path(args["root_dir"]) / args["dir_name"]
+    subprocess.run(["python3", "-m", "venv", str(proj_path / "venv")])
+
+    # Set up some libs for env like pylint.
+
+    pip_path = proj_path / "venv" / "bin" / "pip"
+    subprocess.run([pip_path, "install", "--upgrade", "pip"])
+    subprocess.run([pip_path, "install", "pylint", "wheel"])
+
+    print("Copy/Paste this line to activate environment.")
+    # source "$root_dir"/$dir/venv/bin/activate;cd "$root_dir"/$dir;clear;ls -lrt
+    print(f"cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt")
+    
 
 if __name__ == "__main__":
     main()
