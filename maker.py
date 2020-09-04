@@ -1,6 +1,6 @@
 #!./venv/bin/python
 
-# TODO: Allow user to select python instance to use for install.
+# TODO: If project exists, check if service file exits, allow for it to be added later.
 
 """
 Create python project with best practices.
@@ -91,6 +91,9 @@ def create_dirs(args):
             sys.exit()
 
 def create_config(args):
+    """
+    Create config file.
+    """
 
     conf_string = """[global]
 path    = """ + str(Path(args["root_dir"]) / args["project_name"]) + """
@@ -408,8 +411,11 @@ def main():
     proj_path = Path(args["root_dir"]) / args["project_name"]
 
     # Pick python to run..
+    print("Searching for installed python instances in /usr/bin/ ..")
+    print(subprocess.check_output(['ls /usr/bin/python[0-9].[0-9]'], shell=True).decode('utf-8'))
 
-    subprocess.run(["python3", "-m", "venv", str(proj_path / "venv")], check=True)
+    instance = input("select a python instance from above or set your own path: ")
+    subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
 
     # Set up some libs for env like pylint.
 
