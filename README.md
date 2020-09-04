@@ -26,7 +26,7 @@ No installation or setup should be needed if you have python3.6+ installed as th
 You should be able to run this script with python3 maker.py -h
 
 ```
-usage: maker.py [-h] -rd ROOT_DIR -dn PROJECT_NAME
+usage: maker.py [-h] -rd ROOT_DIR -pn PROJECT_NAME
 
 Python project maker
 
@@ -34,7 +34,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -rd ROOT_DIR, --root_dir ROOT_DIR
                         enter where you would like the directory to be created.
-  -dn PROJECT_NAME, --project_name PROJECT_NAME
+  -pn PROJECT_NAME, --project_name PROJECT_NAME
                         Enter the name of the directory this project will be under.
 ```
 
@@ -44,6 +44,6 @@ Input 'y' for options you would like.
 This will set you up with a venv in a given directory with all the initial components needed to get started.
 
 ### Example
-python maker.py -rd /home/user/projects/ -dn projectname
+python maker.py -rd /home/user/projects/ -pn PROJECT_NAME
 
-In order for you to run this script I must first invent the universe..
+In order for you to run this script, I must first invent the universe..
