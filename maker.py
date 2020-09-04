@@ -71,8 +71,8 @@ def create_dirs(args):
         print(f"{proj_path} already exists.")
         sys.exit()
     else:
-        # create = input(f"Press y to create '{proj_path}': ")
-        create = 'y'
+        create = input(f"Press y to create '{proj_path}': ")
+        # create = 'y'
         if create == 'y':
             proj_path.mkdir()
             (proj_path / "tests").mkdir()
@@ -368,8 +368,8 @@ def main():
     create_dirs(args)
     create_config(args)
     create_bin(args)
-    # create = input("Press y to create service file: ")
-    create = 'n'
+    create = input("Press y to create service file: ")
+    # create = 'n'
     if create == 'y':
         create_service(args)
 
