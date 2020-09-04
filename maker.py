@@ -192,7 +192,7 @@ def create_service(args):
     group = input("Input group name for user: ")
 
     check = 'n'
-    check = input(f"User/group selected: {user}:{group}. Proceed? [y/n] ")
+    check = input(f"User/group selected: {user}:{group}c Proceed? [y/n] ")
     if check == 'n':
         sys.exit()
 
