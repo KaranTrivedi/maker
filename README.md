@@ -20,12 +20,13 @@ cd maker/
 
 No installation or setup should be needed if you have python3.6+ installed as this project only uses default libs.
 
-You should be able to run this script with python3 maker.py -h
-
 ## Example
 python maker.py -rd /home/user/projects/ -dn projectname
 
 ### Help
+You should be able to run this script with python3 maker.py -h
+
+*
 usage: maker.py [-h] -rd ROOT_DIR -dn PROJECT_NAME
 
 Python project maker
@@ -36,6 +37,7 @@ optional arguments:
                         enter where you would like the directory to be created.
   -dn PROJECT_NAME, --project_name PROJECT_NAME
                         Enter the name of the directory this project will be under.
+*
 
 ### Usage
 Define the root directory for your project as the absoloute path is useful for things like deploying service file.
