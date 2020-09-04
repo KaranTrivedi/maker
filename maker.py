@@ -201,22 +201,22 @@ Group=""" + group + """
 [Install]
 WantedBy=multi-user.target
 
-#Optional settings to allow your script to auto restart incase of failure.
-#Restart=always
-#TimeoutStartSec=10
-#RestartSec=10
+# Optional settings to allow your script to auto restart incase of failure.
+# Restart=always
+# TimeoutStartSec=10
+# RestartSec=10
 
-#Move this file from the service folder using these commands
-#sudo mv """ + args["project_name"] + """.service /lib/systemd/system/
+# Move this file from the service folder using these commands
+# sudo mv """ + str(Path(args["root_dir"]) / args["project_name"] / "service" / args["project_name"]) + """.service /lib/systemd/system/
 
 # Issue this command once to make your script wake up and run on startup.
-#sudo sysmtemctl enable """ + args["project_name"] + """.service
+# sudo sysmtemctl enable """ + args["project_name"] + """.service
 
 # Commands for starting, stopping, restarting and checking status of your script.
-#sudo sysmtemctl start """ + args["project_name"] + """.service
-#sudo sysmtemctl stop """ + args["project_name"] + """.service
-#sudo sysmtemctl restart """ + args["project_name"] + """.service
-#sudo sysmtemctl status """ + args["project_name"] + """.service
+# sudo sysmtemctl start """ + args["project_name"] + """.service
+# sudo sysmtemctl stop """ + args["project_name"] + """.service
+# sudo sysmtemctl restart """ + args["project_name"] + """.service
+# sudo sysmtemctl status """ + args["project_name"] + """.service
 
 """
 
