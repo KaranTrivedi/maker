@@ -59,7 +59,7 @@ This will set you up with a venv in a given directory with all the initial compo
 
 ### Example
 ```
-python maker.py -rd /home/user/projects/ -pn PROJECT_NAME
+python3 maker.py -rd /home/user/projects/ -pn PROJECT_NAME
 ```
 
 In order for you to run this script, I must first invent the universe..
