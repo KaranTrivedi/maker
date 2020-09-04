@@ -1,5 +1,7 @@
 #!./venv/bin/python
 
+# TODO: Allow user to select python instance to use for install.
+
 """
 Create python project with best practices.
 
@@ -174,7 +176,11 @@ def create_service(args):
         args (dict): get args from user input flags.
     """
     user = input("Input user name that you would like to run the service as: ")
-    group = input("Input group namefor user: ")
+    group = input("Input group name for user: ")
+
+    check = input(f"User/group selected: {user}:{group}. Proceed? [y/n] ")
+    if check == 'n':
+        sys.exit()
 
     proj_path = str(Path(args["root_dir"]) / args["dir_name"])
     service_string= """[Unit]
@@ -377,6 +383,9 @@ def main():
  
     # python3.8 -m venv venv
     proj_path = Path(args["root_dir"]) / args["dir_name"]
+
+    # Pick python to run..
+
     subprocess.run(["python3", "-m", "venv", str(proj_path / "venv")])
 
     # Set up some libs for env like pylint.
@@ -385,10 +394,11 @@ def main():
     subprocess.run([pip_path, "install", "--upgrade", "pip"])
     subprocess.run([pip_path, "install", "pylint", "wheel"])
 
+    print("******************************************************")
     print("Copy/Paste this line to activate environment.")
+    print("******************************************************")
     # source "$root_dir"/$dir/venv/bin/activate;cd "$root_dir"/$dir;clear;ls -lrt
     print(f"cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt")
-    
 
 if __name__ == "__main__":
     main()
