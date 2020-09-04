@@ -7,6 +7,9 @@ This script has been tested with Ubuntu and python version 3.8
 
 You should be able to run this script with python3 maker.py -h
 
+Example:
+python maker.py -rd /home/user/projects/ -dn projectname
+
 usage: maker.py [-h] -rd ROOT_DIR -dn DIR_NAME
 
 Python project maker
