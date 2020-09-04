@@ -62,7 +62,7 @@ def create_dirs(args):
         args (dict): get args from user input flags.
     """
     root_dir = Path(args["root_dir"])
-    proj_path = Path(args["root_dir"]) / args["dir_name"]
+    proj_path = Path(args["root_dir"]) / args["project_name"]
 
     # Check if directory exists.
 
@@ -90,15 +90,15 @@ def create_dirs(args):
 def create_config(args):
 
     conf_string = """[global]
-path    = """ + str(Path(args["root_dir"]) / args["dir_name"]) + """
+path    = """ + str(Path(args["root_dir"]) / args["project_name"]) + """
 
-[""" + args["dir_name"]+ """]
-log     = logs/""" + args["dir_name"]+ """.log
+[""" + args["project_name"]+ """]
+log     = logs/""" + args["project_name"]+ """.log
 level   = DEBUG
 #level   = INFO
 """
 
-    config_path = Path(args["root_dir"]) / args["dir_name"] / "conf" / "config.ini"
+    config_path = Path(args["root_dir"]) / args["project_name"] / "conf" / "config.ini"
     config_path.write_text(conf_string)
 
 def create_bin(args):
@@ -117,7 +117,7 @@ import logging
 #Define config and logger.
 CONFIG = configparser.ConfigParser()
 CONFIG.read("conf/config.ini")
-SECTION = \"""" + args["dir_name"] + """\"
+SECTION = \"""" + args["project_name"] + """\"
 
 logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
                     level=CONFIG[SECTION]['level'],\\
@@ -138,7 +138,7 @@ def show_sections():
             conf_str += var + "\\t\\t=\\t" + CONFIG[sect][var] + "\\n"
     logger.info(conf_str)
 
-class """ + args["dir_name"].capitalize() + """:
+class """ + args["project_name"].capitalize() + """:
     \"\"\"
     Create sample class
     \"\"\"
@@ -165,7 +165,7 @@ def main():
 if __name__ == "__main__":
     main()"""
 
-    bin_path = Path(args["root_dir"]) / args["dir_name"] / (args["dir_name"] + ".py")
+    bin_path = Path(args["root_dir"]) / args["project_name"] / (args["project_name"] + ".py")
     bin_path.write_text(bin_string)
 
 def create_service(args):
@@ -182,7 +182,7 @@ def create_service(args):
     if check == 'n':
         sys.exit()
 
-    proj_path = str(Path(args["root_dir"]) / args["dir_name"])
+    proj_path = str(Path(args["root_dir"]) / args["project_name"])
     service_string= """[Unit]
 Description=Service
 #After=multi-user.target
@@ -190,7 +190,7 @@ Description=Service
 [Service]
 Type=simple
 WorkingDirectory=""" + proj_path + """
-ExecStart=""" + proj_path + """/venv/bin/python """ + proj_path + """/""" + args["dir_name"] + """.py
+ExecStart=""" + proj_path + """/venv/bin/python """ + proj_path + """/""" + args["project_name"] + """.py
 ExecReload=/bin/kill -HUP $MAINPID
 User=""" + user + """
 Group=""" + group + """
@@ -201,12 +201,12 @@ WantedBy=multi-user.target
 #Move this file from the service folder using these commands
 #sudo mv . /lib/systemd/system/
 
-#sudo sysmtemctl enable """ + args["dir_name"] + """.service
-#sudo sysmtemctl start """ + args["dir_name"] + """.service
-#sudo sysmtemctl status """ + args["dir_name"] + """.service
+#sudo sysmtemctl enable """ + args["project_name"] + """.service
+#sudo sysmtemctl start """ + args["project_name"] + """.service
+#sudo sysmtemctl status """ + args["project_name"] + """.service
 """
 
-    service_path = Path(args["root_dir"]) / args["dir_name"] / "service" / (args["dir_name"] + ".service")
+    service_path = Path(args["root_dir"]) / args["project_name"] / "service" / (args["project_name"] + ".service")
     service_path.write_text(service_string)
 
 def create_gitignore(args):
@@ -347,7 +347,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
     """
-    gitignore_path = Path(args["root_dir"]) / args["dir_name"] / ".gitignore"
+    gitignore_path = Path(args["root_dir"]) / args["project_name"] / ".gitignore"
     gitignore_path.write_text(gitignore_string)
 
 def main():
@@ -360,12 +360,15 @@ def main():
     if CONFIG[SECTION]["level"] == "DEBUG":
         show_sections()
 
-    parser = argparse.ArgumentParser(description='Python project maker')
+    parser = argparse.ArgumentParser(description='Python project maker',\
+                    epilog=f""" Suggested:
+                    python3 maker.py --root_dir {Path.cwd().parent} --project_name PROJECT_NAME
+                    """)
 
     # Add the arguments
     parser.add_argument('-rd', '--root_dir', action='store', required=True,
         help="enter where you would like the directory to be created.")
-    parser.add_argument('-dn', '--dir_name', action='store', required=True,
+    parser.add_argument('-pn', '--project_name', action='store', required=True,
         help="Enter the name of the directory this project will be under.")
 
     args = vars(parser.parse_args())
@@ -382,7 +385,7 @@ def main():
     create_gitignore(args)
 
     # python3.8 -m venv venv
-    proj_path = Path(args["root_dir"]) / args["dir_name"]
+    proj_path = Path(args["root_dir"]) / args["project_name"]
 
     # Pick python to run..
 
