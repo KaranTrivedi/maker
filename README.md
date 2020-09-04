@@ -42,3 +42,6 @@ Define the root directory for your project as the absoloute path is useful for t
 Nmae the project with flag -dn. 
 Input 'y' for options you would like.
 This will set you up with a venv in a given directory with all the initial components needed to get started.
+
+
+In order for you to run this script I must firt invent the universe..
