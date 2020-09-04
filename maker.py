@@ -113,6 +113,10 @@ def create_bin(args):
     """
     bin_string = """#!./venv/bin/python
 
+\"\"\"
+Docstring should be written for each file.
+run `pylint filename.py` to find recommendations on improving format.
+\"\"\"
 import configparser
 import json
 import logging
