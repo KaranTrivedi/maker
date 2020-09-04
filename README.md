@@ -51,6 +51,8 @@ Input 'y' for options you would like.
 This will set you up with a venv in a given directory with all the initial components needed to get started.
 
 ### Example
+```
 python maker.py -rd /home/user/projects/ -pn PROJECT_NAME
+```
 
 In order for you to run this script, I must first invent the universe..
