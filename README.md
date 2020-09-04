@@ -4,13 +4,14 @@ Simple python script for generating a python project with virtual env, logging, 
 Excellent guide for structuring your projects:
 https://docs.python-guide.org/writing/structure/
 
-#Requirements
-python3
-This script has been tested with Ubuntu and python version 3.8
-This should work with python version 3.6 and higher due to the useage of f-strings.
+### Requirements
+python3.6+, *nix
+
+This script has been tested with Ubuntu 18.04 and python version 3.8
+This should work with python version 3.6 and higher due to the usage of f-strings.
 This should also run on any *nix sysetm.
 
-## Get started
+## Getting started
 
 Run command in a folder where you usually create projects.
 git clone https://github.com/KaranTrivedi/maker.git
