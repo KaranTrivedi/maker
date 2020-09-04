@@ -375,9 +375,8 @@ def main():
         show_sections()
 
     parser = argparse.ArgumentParser(description='Python project maker',\
-                    epilog=f""" Suggested:
-                    python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME
-                    """)
+                    epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",\
+                    formatter_class=argparse.RawTextHelpFormatter)
 
     # Add the arguments
     parser.add_argument('-rd', '--root_dir', action='store', required=True,
