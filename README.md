@@ -62,4 +62,8 @@ This will set you up with a venv in a given directory with all the initial compo
 python3 maker.py -rd /home/user/projects/ -pn PROJECT_NAME
 ```
 
+### Coming soon..
+
+I am working to improving the logging module greatly. Will update soon.
+
 In order for you to run this script, I must first invent the universe..
