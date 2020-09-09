@@ -81,6 +81,7 @@ def create_dirs(args):
             (proj_path / "docs").mkdir()
             (proj_path / "conf").mkdir()
             (proj_path / "logs").mkdir()
+            (proj_path / "utils").mkdir()
             Path(proj_path / "logs" / ".gitkeep").touch()
             (proj_path / "data").mkdir()
             Path(proj_path / "README.md").touch()
@@ -388,11 +389,26 @@ def main():
                     epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",\
                     formatter_class=argparse.RawTextHelpFormatter)
 
+    # Valid argws:
+    # my_parser = argparse.ArgumentParser()
+    # my_parser.version = '1.0'
+    # my_parser.add_argument('-a', action='store')
+    # my_parser.add_argument('-b', action='store_const', const=42)
+    # my_parser.add_argument('-c', action='store_true')
+    # my_parser.add_argument('-d', action='store_false')
+    # my_parser.add_argument('-e', action='append')
+    # my_parser.add_argument('-f', action='append_const', const=42)
+    # my_parser.add_argument('-g', action='count')
+    # my_parser.add_argument('-i', action='help')
+    # my_parser.add_argument('-j', action='version')
+    # args = my_parser.parse_args()
+
     # Add the arguments
     parser.add_argument('-rd', '--root_dir', action='store', required=True,
         help="enter where you would like the directory to be created.")
     parser.add_argument('-pn', '--project_name', action='store', required=True,
         help="Enter the name of the directory this project will be under.")
+    parser.add_argument('-j', "--jupyter", action='store_true')
 
     args = vars(parser.parse_args())
     # print(args)
@@ -420,6 +436,10 @@ def main():
     # Set up some libs for env like pylint.
 
     pip_path = proj_path / "venv" / "bin" / "pip"
+    # Install jupyter
+    if args["jupyter"]:
+        subprocess.run([pip_path, "install", "notebook"], check=True)
+
     subprocess.run([pip_path, "install", "--upgrade", "pip"], check=True)
     subprocess.run([pip_path, "install", "pylint", "wheel"], check=True)
 
