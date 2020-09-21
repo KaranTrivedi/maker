@@ -189,13 +189,18 @@ def create_service(args):
 
     proj_path = Path(args["root_dir"]) / args["project_name"]
     (proj_path / "service").mkdir()
-    user = input("Input user name that you would like to run the service as: ")
-    group = input("Input group name for user: ")
 
-    check = 'n'
-    check = input(f"User/group selected: {user}:{group}c Proceed? [y/n] ")
-    if check == 'n':
-        sys.exit()
+    while True:
+
+        user = input("Input user name that you would like to run the service as: ")
+        group = input("Input group name for user: ")
+
+        check = 'n'
+        check = input(f"User/group selected: {user}:{group} Proceed? [y/n/-1 to exit.] ")
+        if check == 'y':
+            break
+        if check == '-1':
+            sys.exit()
 
     proj_path = str(proj_path)
     service_string= """[Unit]

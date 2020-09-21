@@ -12,6 +12,11 @@ https://docs.python-guide.org/writing/structure/
 ### Requirements
 python3.6+, *nix
 
+**MAKE SURE TO INSTALL VENV before running this script if u dont have it already.
+sudo apt install python3-venv
+
+Installing venv module allows you to create the venv for projects in the future.
+
 This script has been tested with Ubuntu 18.04 and python version 3.8
 This should work with python version 3.6 and higher due to the usage of f-strings.
 This should also run on any *nix sysetm.
