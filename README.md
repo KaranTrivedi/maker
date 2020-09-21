@@ -73,4 +73,4 @@ python3 maker.py -rd /home/user/projects/ -pn PROJECT_NAME
 
 I am working to improving the logging module greatly. Will update soon.
 
-In order for you to run this script, I must first invent the universe..
+*In order for you to run this script, I must first invent the universe..*
