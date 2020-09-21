@@ -13,7 +13,9 @@ https://docs.python-guide.org/writing/structure/
 python3.6+, *nix
 
 **MAKE SURE TO INSTALL VENV before running this script if u dont have it already.
+```
 sudo apt install python3-venv
+```
 
 Installing venv module allows you to create the venv for projects in the future.
 
