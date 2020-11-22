@@ -38,12 +38,23 @@ cd maker/
 No installation or setup should be needed if you have python3.6+ installed as this project only uses default libs.
 
 ## Usage
-You should be able to run this script with 
+
+```
+python3 maker.py -r /home/user/projects/ -p PROJECT_NAME
+```
+Define the root directory for your project as the absolute path is useful for things like deploying service file.
+This will set you up with a venv in a given directory with all the initial components needed to get started.
+
+Input 'y' for options you would like.
+
+### Help
+
+You can see the help menu with the following command.
 ```
 python3 maker.py -h
 ```
 
-### Help
+Output:
 ```
 usage: maker.py [-h] -r ROOT_DIR -p PROJECT_NAME
 
@@ -59,16 +70,24 @@ optional arguments:
 Suggested: python3 maker.py --root_dir */PATH/OF/WORKING/DIR* --project_name PROJECT_NAME
 ```
 
-Define the root directory for your project as the absolute path is useful for things like deploying service file.
-Name the project with flag -p.
+As you can see in the help output, the last line shows a "suggested" command. 
+This string will detect which folder you are in and give a sample command that you can run, you only need to edit the PROJECT_NAME
+and a project will be created in the parent dir.
 
-Input 'y' for options you would like.
-
-This will set you up with a venv in a given directory with all the initial components needed to get started.
-
-### Example
+For example:
+You would be in the maker directory running this command:
 ```
-python3 maker.py -r /home/user/projects/ -p PROJECT_NAME
+/home/USER/projects_dir/maker
+```
+
+And you would get the command:
+```
+python3 maker.py --root_dir /home/USER/projects_dir/ --project_name some_project
+```
+
+You get:
+```
+/home/USER/projects_dir/some_project
 ```
 
 ### Coming soon..
