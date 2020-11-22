@@ -4,11 +4,11 @@ Description=Service
 
 [Service]
 Type=simple
-WorkingDirectory=/home/karan/projects/maker
-ExecStart=/home/karan/projects/maker/venv/bin/python3.8 /home/karan/projects/maker/maker.py
+WorkingDirectory=/home/USER/maker
+ExecStart=/home/USER/projects/maker/venv/bin/python3.8 /home/USER/maker/maker.py
 ExecReload=/bin/kill -HUP 
-User=karan
-Group=karan
+User=USER
+Group=GROUP
 
 Restart=always
 TimeoutStartSec=10

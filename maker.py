@@ -1,6 +1,9 @@
 #!./venv/bin/python
 
-# TODO: If project exists, check if service file exits, allow for it to be added later.
+# TODO: Create status file for steps. Continue where setup left off.
+# TODO: Improving logging configs.
+# TODO: Allow setting pythonbin with flag.
+# TODO: Check if python bin exists.
 
 """
 Create python project with best practices.
@@ -17,17 +20,20 @@ from os import path
 from pathlib import Path
 import subprocess
 
-#Define config and logger.
+# Define config and logger.
 CONFIG = configparser.ConfigParser()
 CONFIG.read("conf/config.ini")
 SECTION = "maker"
 
-logging.basicConfig(filename=CONFIG[SECTION]["log"],\
-                    level=CONFIG[SECTION]["level"],\
-                    format='%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s',\
-                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(
+    filename=CONFIG[SECTION]["log"],
+    level=CONFIG[SECTION]["level"],
+    format="%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 logger = logging.getLogger(SECTION)
+
 
 def show_sections():
     """
@@ -40,6 +46,7 @@ def show_sections():
         for var in list(CONFIG[sect]):
             conf_str += var + "\t\t=\t" + CONFIG[sect][var] + "\n"
     logger.info(conf_str)
+
 
 # class Sample:
 #     """
@@ -54,6 +61,7 @@ def show_sections():
 #         stringify
 #         """
 #         return json.dumps(vars(self), indent=2)
+
 
 def create_dirs(args):
     """Create given directory under given root dir.
@@ -75,7 +83,7 @@ def create_dirs(args):
     else:
         create = input(f"Press y to create '{proj_path}': ")
         # create = 'y'
-        if create == 'y':
+        if create == "y":
             proj_path.mkdir()
             (proj_path / "tests").mkdir()
             (proj_path / "docs").mkdir()
@@ -91,22 +99,32 @@ def create_dirs(args):
         else:
             sys.exit()
 
+
 def create_config(args):
     """
     Create config file.
     """
 
-    conf_string = """[global]
-path    = """ + str(Path(args["root_dir"]) / args["project_name"]) + """
+    conf_string = (
+        """[global]
+path    = """
+        + str(Path(args["root_dir"]) / args["project_name"])
+        + """
 
-[""" + args["project_name"]+ """]
-log     = logs/""" + args["project_name"]+ """.log
+["""
+        + args["project_name"]
+        + """]
+log     = logs/"""
+        + args["project_name"]
+        + """.log
 level   = DEBUG
 #level   = INFO
 """
+    )
 
     config_path = Path(args["root_dir"]) / args["project_name"] / "conf" / "config.ini"
     config_path.write_text(conf_string)
+
 
 def create_bin(args):
     """
@@ -115,7 +133,8 @@ def create_bin(args):
     Args:
         args (dict): get args from user input flags.
     """
-    bin_string = """#!./venv/bin/python
+    bin_string = (
+        """#!./venv/bin/python
 
 \"\"\"
 Docstring should be written for each file.
@@ -128,7 +147,9 @@ import logging
 #Define config and logger.
 CONFIG = configparser.ConfigParser()
 CONFIG.read("conf/config.ini")
-SECTION = \"""" + args["project_name"] + """\"
+SECTION = \""""
+        + args["project_name"]
+        + """\"
 
 logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
                     level=CONFIG[SECTION]['level'],\\
@@ -149,7 +170,9 @@ def show_sections():
             conf_str += var + "\\t\\t=\\t" + CONFIG[sect][var] + "\\n"
     logger.info(conf_str)
 
-class """ + args["project_name"].capitalize() + """:
+class """
+        + args["project_name"].capitalize()
+        + """:
     \"\"\"
     Create sample class
     \"\"\"
@@ -175,9 +198,13 @@ def main():
 
 if __name__ == "__main__":
     main()"""
+    )
 
-    bin_path = Path(args["root_dir"]) / args["project_name"] / (args["project_name"] + ".py")
+    bin_path = (
+        Path(args["root_dir"]) / args["project_name"] / (args["project_name"] + ".py")
+    )
     bin_path.write_text(bin_string)
+
 
 def create_service(args):
     """
@@ -195,25 +222,40 @@ def create_service(args):
         user = input("Input user name that you would like to run the service as: ")
         group = input("Input group name for user: ")
 
-        check = 'n'
-        check = input(f"User/group selected: {user}:{group} Proceed? [y/n/-1 to exit.] ")
-        if check == 'y':
+        check = "n"
+        check = input(
+            f"User/group selected: {user}:{group} Proceed? [y/n/-1 to exit.] "
+        )
+        if check == "y":
             break
-        if check == '-1':
+        if check == "-1":
             sys.exit()
 
     proj_path = str(proj_path)
-    service_string= """[Unit]
+    service_string = (
+        """[Unit]
 Description=Service
 #After=multi-user.target
 
 [Service]
 Type=simple
-WorkingDirectory=""" + proj_path + """
-ExecStart=""" + proj_path + """/venv/bin/python """ + proj_path + """/""" + args["project_name"] + """.py
+WorkingDirectory="""
+        + proj_path
+        + """
+ExecStart="""
+        + proj_path
+        + """/venv/bin/python """
+        + proj_path
+        + """/"""
+        + args["project_name"]
+        + """.py
 ExecReload=/bin/kill -HUP $MAINPID
-User=""" + user + """
-Group=""" + group + """
+User="""
+        + user
+        + """
+Group="""
+        + group
+        + """
 
 [Install]
 WantedBy=multi-user.target
@@ -224,21 +266,45 @@ WantedBy=multi-user.target
 # RestartSec=10
 
 # Move this file from the service folder using these commands
-# sudo mv """ + str(Path(args["root_dir"]) / args["project_name"] / "service" / args["project_name"]) + """.service /lib/systemd/system/
+# sudo mv """
+        + str(
+            Path(args["root_dir"])
+            / args["project_name"]
+            / "service"
+            / args["project_name"]
+        )
+        + """.service /lib/systemd/system/
 
 # Issue this command once to make your script wake up and run on startup.
-# sudo sysmtemctl enable """ + args["project_name"] + """.service
+# sudo sysmtemctl enable """
+        + args["project_name"]
+        + """.service
 
 # Commands for starting, stopping, restarting and checking status of your script.
-# sudo sysmtemctl start """ + args["project_name"] + """.service
-# sudo sysmtemctl stop """ + args["project_name"] + """.service
-# sudo sysmtemctl restart """ + args["project_name"] + """.service
-# sudo sysmtemctl status """ + args["project_name"] + """.service
+# sudo sysmtemctl start """
+        + args["project_name"]
+        + """.service
+# sudo sysmtemctl stop """
+        + args["project_name"]
+        + """.service
+# sudo sysmtemctl restart """
+        + args["project_name"]
+        + """.service
+# sudo sysmtemctl status """
+        + args["project_name"]
+        + """.service
 
 """
+    )
 
-    service_path = Path(args["root_dir"]) / args["project_name"] / "service" / (args["project_name"] + ".service")
+    service_path = (
+        Path(args["root_dir"])
+        / args["project_name"]
+        / "service"
+        / (args["project_name"] + ".service")
+    )
     service_path.write_text(service_string)
+
 
 def create_gitignore(args):
     """
@@ -382,6 +448,7 @@ dmypy.json
     gitignore_path = Path(args["root_dir"]) / args["project_name"] / ".gitignore"
     gitignore_path.write_text(gitignore_string)
 
+
 def main():
     """
     Main function.
@@ -390,9 +457,11 @@ def main():
     if CONFIG[SECTION]["level"] == "DEBUG":
         show_sections()
 
-    parser = argparse.ArgumentParser(description='Python project maker',\
-                    epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",\
-                    formatter_class=argparse.RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description="Python project maker",
+        epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
 
     # Valid argws:
     # my_parser = argparse.ArgumentParser()
@@ -409,11 +478,21 @@ def main():
     # args = my_parser.parse_args()
 
     # Add the arguments
-    parser.add_argument('-rd', '--root_dir', action='store', required=True,
-        help="enter where you would like the directory to be created.")
-    parser.add_argument('-pn', '--project_name', action='store', required=True,
-        help="Enter the name of the directory this project will be under.")
-    parser.add_argument('-j', "--jupyter", action='store_true')
+    parser.add_argument(
+        "-rd",
+        "--root_dir",
+        action="store",
+        required=True,
+        help="enter where you would like the directory to be created.",
+    )
+    parser.add_argument(
+        "-pn",
+        "--project_name",
+        action="store",
+        required=True,
+        help="Enter the name of the directory this project will be under.",
+    )
+    parser.add_argument("-j", "--jupyter", action="store_true")
 
     args = vars(parser.parse_args())
     # print(args)
@@ -421,9 +500,9 @@ def main():
     create_dirs(args)
     create_config(args)
     create_bin(args)
-    create = 'n'
+    create = "n"
     create = input("Press y to create service file: ")
-    if create == 'y':
+    if create == "y":
         create_service(args)
 
     create_gitignore(args)
@@ -433,7 +512,11 @@ def main():
 
     # Pick python to run..
     print("Searching for installed python instances in /usr/bin/ ..")
-    print(subprocess.check_output(['ls /usr/bin/python[0-9].[0-9]'], shell=True).decode('utf-8'))
+    print(
+        subprocess.check_output(["ls /usr/bin/python[0-9].[0-9]"], shell=True).decode(
+            "utf-8"
+        )
+    )
 
     instance = input("select a python instance from above or set your own path: ")
     subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
@@ -448,12 +531,17 @@ def main():
     subprocess.run([pip_path, "install", "--upgrade", "pip"], check=True)
     subprocess.run([pip_path, "install", "pylint", "wheel"], check=True)
 
-    print("*****************************************************************************")
+    print(
+        "*****************************************************************************"
+    )
     print("Copy/Paste this line to terminal to go to project and activate environment.")
-    print("*****************************************************************************")
+    print(
+        "*****************************************************************************"
+    )
 
     # source "$root_dir"/$dir/venv/bin/activate;cd "$root_dir"/$dir;clear;ls -lrt
     print(f"cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt;pwd")
+
 
 if __name__ == "__main__":
     main()
