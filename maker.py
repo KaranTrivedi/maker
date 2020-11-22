@@ -13,7 +13,8 @@ some default features in place such as logging, service file, etc. in place.
 """
 
 # TODO: Track where process left off.
-# TODO: Adde better logging.
+# TODO: Added better logging.
+# TODO: Read which user/group is running command, use that for creating service file as an option.
 
 import argparse
 import configparser
@@ -51,21 +52,6 @@ def show_sections():
     logger.info(conf_str)
 
 
-# class Sample:
-#     """
-#     Create class
-#     """
-
-#     def __init__(self, var):
-#         self.var = var
-
-#     def __str__(self):
-#         """
-#         stringify
-#         """
-#         return json.dumps(vars(self), indent=2)
-
-
 def create_dirs(args):
     """Create given directory under given root dir.
 
@@ -93,6 +79,7 @@ def create_dirs(args):
             (proj_path / "conf").mkdir()
             (proj_path / "logs").mkdir()
             (proj_path / "utils").mkdir()
+            (proj_path / "sample").mkdir()
             Path(proj_path / "logs" / ".gitkeep").touch()
             (proj_path / "data").mkdir()
             Path(proj_path / "README.md").touch()
@@ -132,6 +119,7 @@ level   = DEBUG
 def create_bin(args):
     """
     Create sample bin file, set up class, logging, config etc.
+    ALSO create a copy of the file under sample/ for future reference/use
 
     Args:
         args (dict): get args from user input flags.
@@ -200,14 +188,18 @@ def main():
         show_sections()
 
 if __name__ == "__main__":
-    main()"""
+    main()
+"""
     )
 
     bin_path = (
         Path(args["root_dir"]) / args["project_name"] / (args["project_name"] + ".py")
     )
+    sample_path = (
+        Path(args["root_dir"]) / args["project_name"] / "sample" / (args["project_name"] + ".py")
+    )
     bin_path.write_text(bin_string)
-
+    sample_path.write_text(bin_string)
 
 def create_service(args):
     """
@@ -465,20 +457,6 @@ def main():
         epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",
         formatter_class=argparse.RawTextHelpFormatter,
     )
-
-    # Valid argws:
-    # my_parser = argparse.ArgumentParser()
-    # my_parser.version = '1.0'
-    # my_parser.add_argument('-a', action='store')
-    # my_parser.add_argument('-b', action='store_const', const=42)
-    # my_parser.add_argument('-c', action='store_true')
-    # my_parser.add_argument('-d', action='store_false')
-    # my_parser.add_argument('-e', action='append')
-    # my_parser.add_argument('-f', action='append_const', const=42)
-    # my_parser.add_argument('-g', action='count')
-    # my_parser.add_argument('-i', action='help')
-    # my_parser.add_argument('-j', action='version')
-    # args = my_parser.parse_args()
 
     # Add the arguments
     parser.add_argument(

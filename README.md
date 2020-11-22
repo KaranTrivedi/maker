@@ -55,10 +55,12 @@ optional arguments:
                         enter where you would like the directory to be created.
   -p PROJECT_NAME, --project_name PROJECT_NAME
                         Enter the name of the directory this project will be under.
+
+Suggested: python3 maker.py --root_dir */PATH/OF/WORKING/DIR* --project_name PROJECT_NAME
 ```
 
 Define the root directory for your project as the absolute path is useful for things like deploying service file.
-Name the project with flag -dn.
+Name the project with flag -p.
 
 Input 'y' for options you would like.
 
