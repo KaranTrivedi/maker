@@ -12,6 +12,9 @@ This project allows user to get started with a new python project with
 some default features in place such as logging, service file, etc. in place.
 """
 
+# TODO: Track where process left off.
+# TODO: Adde better logging.
+
 import argparse
 import configparser
 import logging
@@ -479,14 +482,14 @@ def main():
 
     # Add the arguments
     parser.add_argument(
-        "-rd",
+        "-r",
         "--root_dir",
         action="store",
         required=True,
         help="enter where you would like the directory to be created.",
     )
     parser.add_argument(
-        "-pn",
+        "-p",
         "--project_name",
         action="store",
         required=True,
@@ -540,7 +543,7 @@ def main():
     )
 
     # source "$root_dir"/$dir/venv/bin/activate;cd "$root_dir"/$dir;clear;ls -lrt
-    print(f"cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt;pwd")
+    print(f"deactivate;cd {str(proj_path)};source venv/bin/activate;clear;ls -lrt;pwd")
 
 
 if __name__ == "__main__":

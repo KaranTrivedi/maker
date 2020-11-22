@@ -45,15 +45,15 @@ python3 maker.py -h
 
 ### Help
 ```
-usage: maker.py [-h] -rd ROOT_DIR -pn PROJECT_NAME
+usage: maker.py [-h] -r ROOT_DIR -p PROJECT_NAME
 
 Python project maker
 
 optional arguments:
   -h, --help            show this help message and exit
-  -rd ROOT_DIR, --root_dir ROOT_DIR
+  -r ROOT_DIR, --root_dir ROOT_DIR
                         enter where you would like the directory to be created.
-  -pn PROJECT_NAME, --project_name PROJECT_NAME
+  -p PROJECT_NAME, --project_name PROJECT_NAME
                         Enter the name of the directory this project will be under.
 ```
 
@@ -66,7 +66,7 @@ This will set you up with a venv in a given directory with all the initial compo
 
 ### Example
 ```
-python3 maker.py -rd /home/user/projects/ -pn PROJECT_NAME
+python3 maker.py -r /home/user/projects/ -p PROJECT_NAME
 ```
 
 ### Coming soon..
