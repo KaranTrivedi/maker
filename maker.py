@@ -80,7 +80,7 @@ def create_dirs(args):
             (proj_path / "logs").mkdir()
             (proj_path / "utils").mkdir()
             (proj_path / "sample").mkdir()
-            Path(proj_path / "logs" / ".gitkeep").touch()
+            #Path(proj_path / "logs" / ".gitkeep").touch()
             (proj_path / "data").mkdir()
             Path(proj_path / "README.md").touch()
             Path(proj_path / "requirements.txt").touch()
