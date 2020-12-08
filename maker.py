@@ -77,6 +77,7 @@ def create_dirs(args):
             (proj_path / "tests").mkdir()
             (proj_path / "docs").mkdir()
             (proj_path / "conf").mkdir()
+            (proj_path / "libs").mkdir()
             (proj_path / "logs").mkdir()
             (proj_path / "utils").mkdir()
             (proj_path / "sample").mkdir()
