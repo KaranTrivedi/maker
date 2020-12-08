@@ -142,24 +142,6 @@ SECTION = \""""
         + args["project_name"]
         + """\"
 
-logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
-                    level=CONFIG[SECTION]['level'],\\
-                    format='%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s',\\
-                    datefmt='%Y-%m-%d %H:%M:%S')
-
-logger = logging.getLogger(SECTION)
-
-def show_sections():
-    \"\"\"
-    Output all options for given section
-    \"\"\"
-
-    conf_str = "\\n\\n"
-    for sect in CONFIG.sections():
-        conf_str += "[" + sect + "]\\n"
-        for var in list(CONFIG[sect]):
-            conf_str += var + "\\t\\t=\\t" + CONFIG[sect][var] + "\\n"
-    logger.info(conf_str)
 
 class """
         + args["project_name"].capitalize()
@@ -182,10 +164,15 @@ def main():
     \"\"\"
     Main function.
     \"\"\"
-    logger.info("####################STARTING####################")
 
-    if CONFIG[SECTION]["level"] == "DEBUG":
-        show_sections()
+    logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
+                    level=CONFIG[SECTION]['level'],\\
+                    format='%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s',\\
+                    datefmt='%Y-%m-%d %H:%M:%S')
+
+    logger = logging.getLogger(SECTION)
+
+    logger.info("####################STARTING####################")
 
 if __name__ == "__main__":
     main()
@@ -260,8 +247,9 @@ WantedBy=multi-user.target
 # TimeoutStartSec=10
 # RestartSec=10
 
-# Move this file from the service folder using these commands
-# sudo mv """
+# Copy this file from the service folder using these commands
+# Edit the file here for future uses, and use issue the command to override the existing file.
+# sudo cp """
         + str(
             Path(args["root_dir"])
             / args["project_name"]
@@ -269,6 +257,12 @@ WantedBy=multi-user.target
             / args["project_name"]
         )
         + """.service /lib/systemd/system/
+
+# sudo systemctl daemon-reload
+# sudo sysmtemctl restart """
+        + args["project_name"]
+        + """.service
+# Use above commands to reload and restart service.
 
 # Issue this command once to make your script wake up and run on startup.
 # sudo sysmtemctl enable """
