@@ -1,10 +1,5 @@
 #!./venv/bin/python
 
-# TODO: Create status file for steps. Continue where setup left off.
-# TODO: Improving logging configs.
-# TODO: Allow setting pythonbin with flag.
-# TODO: Check if python bin exists.
-
 """
 Create python project with best practices.
 
@@ -12,9 +7,9 @@ This project allows user to get started with a new python project with
 some default features in place such as logging, service file, etc. in place.
 """
 
-# TODO: Track where process left off.
-# TODO: Added better logging.
 # TODO: Read which user/group is running command, use that for creating service file as an option.
+# TODO: Create status file for steps. Continue where setup left off.
+# TODO: Check if python bin exists.
 
 import argparse
 import configparser
@@ -29,28 +24,7 @@ CONFIG = configparser.ConfigParser()
 CONFIG.read("conf/config.ini")
 SECTION = "maker"
 
-logging.basicConfig(
-    filename=CONFIG[SECTION]["log"],
-    level=CONFIG[SECTION]["level"],
-    format="%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
 logger = logging.getLogger(SECTION)
-
-
-def show_sections():
-    """
-    Output all options for given section
-    """
-
-    conf_str = "\n\n"
-    for sect in CONFIG.sections():
-        conf_str += "[" + sect + "]\n"
-        for var in list(CONFIG[sect]):
-            conf_str += var + "\t\t=\t" + CONFIG[sect][var] + "\n"
-    logger.info(conf_str)
-
 
 def create_dirs(args):
     """Create given directory under given root dir.
@@ -169,7 +143,7 @@ def main():
     logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
                     level=CONFIG[SECTION]['level'],\\
                     format='%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s',\\
-                    datefmt='%Y-%m-%d %H:%M:%S')
+                    datefmt="%Y-%m-%dT%H:%M:%S%z")
 
     logger = logging.getLogger(SECTION)
 
@@ -444,8 +418,13 @@ def main():
     Main function.
     """
 
-    if CONFIG[SECTION]["level"] == "DEBUG":
-        show_sections()
+    logging.basicConfig(
+        filename=CONFIG[SECTION]["log"],
+        level=CONFIG[SECTION]["level"],
+        format="%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S%z",
+    )
+
 
     parser = argparse.ArgumentParser(
         description="Python project maker",
@@ -468,6 +447,12 @@ def main():
         required=True,
         help="Enter the name of the directory this project will be under.",
     )
+    parser.add_argument(
+        "-b",
+        "--python_bin_path",
+        action="store",
+        help="Enter path to python binary to be used. Optional.",
+    )
     parser.add_argument("-j", "--jupyter", action="store_true")
 
     args = vars(parser.parse_args())
@@ -487,19 +472,23 @@ def main():
     proj_path = Path(args["root_dir"]) / args["project_name"]
 
     # Pick python to run..
-    print("Searching for installed python instances in /usr/bin/ ..")
-    print(
-        subprocess.check_output(["ls /usr/bin/python[0-9].[0-9]"], shell=True).decode(
-            "utf-8"
+    if not args["python_bin_path"]:
+        print("Searching for installed python instances in /usr/bin/ ..")
+        print(
+            subprocess.check_output(["ls /usr/bin/python[0-9].[0-9]"], shell=True).decode(
+                "utf-8"
+            )
         )
-    )
 
-    instance = input("select a python instance from above or set your own path: ")
-    subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
+        instance = input("select a python instance from above or set your own path: ")
+        subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
+    else:
+        instance = args["python_bin_path"]
+        subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
 
     # Set up some libs for env like pylint.
-
     pip_path = proj_path / "venv" / "bin" / "pip"
+
     # Install jupyter
     if args["jupyter"]:
         subprocess.run([pip_path, "install", "notebook"], check=True)
