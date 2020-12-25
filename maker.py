@@ -117,6 +117,7 @@ SECTION = \""""
         + args["project_name"]
         + """\"
 
+logger = logging.getLogger(SECTION)
 
 class """
         + args["project_name"].capitalize()
@@ -140,12 +141,10 @@ def main():
     Main function.
     \"\"\"
 
-    logging.basicConfig(filename=CONFIG[SECTION]['log'],\\
-                    level=CONFIG[SECTION]['level'],\\
-                    format='%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s',\\
+    logging.basicConfig(filename=CONFIG[SECTION]["log"],
+                    level=CONFIG[SECTION]["level"],
+                    format="%(asctime)s::%(name)s::%(funcName)s::%(levelname)s::%(message)s",
                     datefmt="%Y-%m-%dT%H:%M:%S%z")
-
-    logger = logging.getLogger(SECTION)
 
     logger.info("####################STARTING####################")
 
@@ -234,27 +233,27 @@ WantedBy=multi-user.target
         + """.service /lib/systemd/system/
 
 # sudo systemctl daemon-reload
-# sudo sysmtemctl restart """
+# sudo systemctl restart """
         + args["project_name"]
         + """.service
 # Use above commands to reload and restart service.
 
 # Issue this command once to make your script wake up and run on startup.
-# sudo sysmtemctl enable """
+# sudo systemctl enable """
         + args["project_name"]
         + """.service
 
 # Commands for starting, stopping, restarting and checking status of your script.
-# sudo sysmtemctl start """
+# sudo systemctl start """
         + args["project_name"]
         + """.service
-# sudo sysmtemctl stop """
+# sudo systemctl stop """
         + args["project_name"]
         + """.service
-# sudo sysmtemctl restart """
+# sudo systemctl restart """
         + args["project_name"]
         + """.service
-# sudo sysmtemctl status """
+# sudo systemctl status """
         + args["project_name"]
         + """.service
 
