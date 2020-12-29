@@ -91,9 +91,7 @@ You get:
 ```
 
 ### Coming soon..
-
-I am working to improving the logging module greatly. Will update soon.
-
-
+ 
+-
 
 *In order for you to run this script, I must first invent the universe..*
