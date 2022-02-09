@@ -90,6 +90,8 @@ You get:
 /home/USER/projects_dir/some_project
 ```
 
+### Known Issues
+Relative paths in inputs will not work as intended. 
 ### Coming soon..
  
 -
