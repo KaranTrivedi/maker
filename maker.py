@@ -430,6 +430,7 @@ def main():
         description="Python project maker",
         epilog=f"""Suggested: python3 maker.py --root_dir {str(Path.cwd().parent)} --project_name PROJECT_NAME""",
         formatter_class=argparse.RawTextHelpFormatter,
+        #formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
     # Add the arguments
@@ -481,10 +482,16 @@ def main():
         )
 
         instance = input("select a python instance from above or set your own path: ")
-        subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
     else:
         instance = args["python_bin_path"]
+
+    # Install instance venv.
+    try:
         subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
+    except Exception as exp:
+        print(str(exp))
+        print("Please install python3.xx-venv for your device before continuing.")
+
 
     # Set up some libs for env like pylint.
     pip_path = proj_path / "venv" / "bin" / "pip"
