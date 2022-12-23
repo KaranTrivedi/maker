@@ -476,7 +476,7 @@ def main():
     if not args["python_bin_path"]:
         print("Searching for installed python instances in /usr/bin/ ..")
         print(
-            subprocess.check_output(["ls /usr/bin/python[0-9].[0-9]"], shell=True).decode(
+            subprocess.check_output(["find /usr/bin/ -maxdepth 1 -regex '/usr/bin/python[0-9]+.[0-9]+'"], shell=True).decode(
                 "utf-8"
             )
         )
@@ -490,7 +490,7 @@ def main():
         subprocess.run([instance, "-m", "venv", str(proj_path / "venv")], check=True)
     except Exception as exp:
         print(str(exp))
-        print("Please install python3.xx-venv for your device before continuing.")
+        print("Please install python3.xx-venv for seelcted python version for your device before continuing.")
 
 
     # Set up some libs for env like pylint.
